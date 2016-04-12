@@ -89,7 +89,7 @@ class WeightedEdge(Edge):
 
     def __str__(self):
 
-        return '{0}->{1} ({2}, {3})'.format(self.src,self.dest,(self.td,self.od))
+        return '{0}->{1} ({2}, {3})'.format(self.src,self.dest,self.td,self.od)
 
 class WeightedDigraph(Digraph):
     def __init__(self):
@@ -100,17 +100,11 @@ class WeightedDigraph(Digraph):
         dest = edge.getDestination()
         td = float(edge.getTotalDistance())
         od = float(edge.getOutdoorDistance())
-        dest_dict = {}
-        dest_dict[dest] = (td,od)
-
-
+        
         if not(src in self.nodes and dest in self.nodes):
             raise ValueError('Node not in[ graph')
 
-        # self.edges[src][dest_dict]
         self.edges[src].append([dest,td,od])
-
-        # self.edges[src] = dest_dict[dest]
 
     def edgeDist(self, start, end):
 
@@ -124,31 +118,26 @@ class WeightedDigraph(Digraph):
             chillen.append(node[0])
         return chillen
 
-
-
-    def testfunc(self):
-        pass
-
     def __str__(self):
         res = ''
         for k in self.edges:
 #
             for d in self.edges[k]:
 #
-                res = '{0}{1}->{2} ({3}, {4)\n'.format(res, k, d[0], d[1],d[2])
+                res = '{0}{1}->{2} ({3}, {4})\n'.format(res, k, d[0], d[1],d[2])
         return res[:-1]
 
-g = WeightedDigraph()
-h = Digraph()
-a = Node('a')
-b = Node('b')
-c = Node('c')
-g.addNode(a)
-g.addNode(b)
-g.addNode(c)
-e1 = WeightedEdge(a,b,10,5)
-e2 = WeightedEdge(a,c,10,5)
-e3 = WeightedEdge(b,c,10,5)
-g.addEdge(e1)
-g.addEdge(e2)
-g.addEdge(e3)
+#g = WeightedDigraph()
+#h = Digraph()
+#a = Node('a')
+#b = Node('b')
+#c = Node('c')
+#g.addNode(a)
+#g.addNode(b)
+#g.addNode(c)
+#e1 = WeightedEdge(a,b,10,5)
+#e2 = WeightedEdge(a,c,10,5)
+#e3 = WeightedEdge(b,c,10,5)
+#g.addEdge(e1)
+#g.addEdge(e2)
+#g.addEdge(e3)
