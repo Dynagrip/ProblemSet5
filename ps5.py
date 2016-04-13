@@ -262,15 +262,20 @@ def directedDFS(digraph, start, end, maxTotalDist, maxDistOutdoors):
         
         for i in range(len(paths)):
             distances.append(pathDist(digraph,paths[i])[0])
+            
 #        print distances
 #        print distances.index(min(distances))
 #        print paths[distances.index(min(distances))]
-#        if shortest != None:
-#            shortest = paths[distances.index(min(distances))]
-#            return shortest
+        if distances != [] and distances != None:
             
-        return shortest
-        
+            try:
+            
+                return paths[distances.index(min(distances))]
+            except:
+                return shortest
+            
+        else:
+            return shortest
     answer = DFSShortest(digraph, start, end, maxTotalDist, maxDistOutdoors)
     typed = []
     
@@ -422,6 +427,17 @@ def directedDFS(digraph, start, end, maxTotalDist, maxDistOutdoors):
 #    print "Expected: No such path! Should throw a value error."
 #    print "Did brute force search raise an error?", bruteRaisedErr
 #    print "Did DFS search raise an error?", dfsRaisedErr
+map2 = WeightedDigraph()
+map2.addNode(Node('1'))
+map2.addNode(Node('2'))
+map2.addNode(Node('3'))
+map2.addNode(Node('4'))
+map2.addEdge(WeightedEdge(Node('1'),Node('2'),10.0,5.0))
+map2.addEdge(WeightedEdge(Node('1'),Node('4'),5.0,1.0))
+map2.addEdge(WeightedEdge(Node('2'),Node('3'),8.0,5.0))
+map2.addEdge(WeightedEdge(Node('4'),Node('3'),8.0,5.0))
+pathmap2 = directedDFS(map2, "1", "3", 18, 0)
+
 map5 = WeightedDigraph()
 map5.addNode(Node('1'))
 map5.addNode(Node('2'))
@@ -429,7 +445,7 @@ map5.addNode(Node('3'))
 map5.addNode(Node('4'))
 map5.addNode(Node('5'))
 map5.addEdge(WeightedEdge(Node('1'),Node('2'),5.0,2.0))
-map5.addEdge(WeightedEdge(Node('3'),Node('5'),6.0,3.0))
+map5.addEdge(WeightedEdge(Node('3'),Node('5'),6.0,1.0))
 map5.addEdge(WeightedEdge(Node('2'),Node('3'),20.0,10.0))
 map5.addEdge(WeightedEdge(Node('2'),Node('4'),10.0,5.0))
 map5.addEdge(WeightedEdge(Node('4'),Node('3'),5.0,1.0))
@@ -449,14 +465,15 @@ map6.addEdge(WeightedEdge(Node('2'),Node('3'),20.0,10.0))
 map6.addEdge(WeightedEdge(Node('2'),Node('4'),10.0,5.0))
 map6.addEdge(WeightedEdge(Node('4'),Node('3'),5.0,1.0))
 map6.addEdge(WeightedEdge(Node('4'),Node('5'),20.0,1.0))
-path = directedDFS(map6, "4", "5", 21, 11)
+directedDFS(map6, "4", "5", 21, 1)
+pathmap5 = directedDFS(map5, "4", "5", 21, 11)
 testpath1 = []
 testpath2 = []
-for element in path:
+for element in pathmap6:
     testpath1.append(Node(element))
-testpath2 = [Node('4'),Node('3'),Node('5')]
+#testpath2 = [Node('4'),Node('3'),Node('5')]
 #print pathDist(map6,testpath1)
 #print pathDist(map6,testpath2)
-path1 = directedDFS(map5, "1", "3", 17, 8)
-print path
-print path1
+print pathmap2, "map2"
+print pathmap5, "map5"
+print pathmap6, "map6"
